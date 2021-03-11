@@ -11,7 +11,7 @@ const io = socketio(server, {
 
 io.on('connection', socket => {
     socket.on('draw', data => {
-        socket.broadcast.emit('draw', data);
+        socket.broadcast.emit('draw', data); // send to all clients except sender
     });
 });
 
