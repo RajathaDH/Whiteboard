@@ -3,10 +3,16 @@ const socketio = require('socket.io');
 
 const server = http.createServer();
 
-const io = socketio(server);
+const io = socketio(server, {
+    cors: {
+        origin: '*'
+    }
+});
 
 io.on('connection', socket => {
-    console.log('New connection');
+    socket.on('draw', data => {
+        socket.broadcast.emit('draw', data);
+    });
 });
 
 const PORT = process.env.PORT || 3000;
