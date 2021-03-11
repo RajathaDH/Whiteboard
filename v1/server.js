@@ -9,4 +9,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 
+io.on('connection', socket => {
+    socket.on('draw', data => {
+        socket.broadcast.emit('draw', data);
+    });
+});
+
+
 server.listen(3000, () => console.log(`Server running on port ${PORT}`));
