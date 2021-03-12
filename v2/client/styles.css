@@ -5,13 +5,13 @@
 }
 
 .container{
-    width: 100%;
+    width: 80%;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0 auto;
 }
 
 .canvas-container {
+    width: 800px;
+    height: 600px;
     border: 4px solid black;
 }

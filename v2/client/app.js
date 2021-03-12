@@ -1,16 +1,24 @@
-const socket = io('http://localhost:3000');
+//const socket = io('http://localhost:3000');
 
 const canvas = document.getElementById('board');
+const lineWidth = document.querySelector('#lineWidth');
+const colour = document.querySelector('#colour');
+
 const ctx = canvas.getContext('2d');
 
-canvas.width = 600;
+canvas.width = 800;
 canvas.height = 600;
 
-ctx.lineWidth = 10;
+//ctx.lineWidth = 10;
 ctx.lineCap = 'round';
-//ctx.strokeStyle = 'red';
+//ctx.strokeStyle = 'black';
 
 let mousePressed = false;
+
+const options = {
+    lineWidth: 10,
+    colour: 'black'
+};
 
 // check if mouse is released
 canvas.addEventListener('mousedown', (e) => {
@@ -18,7 +26,7 @@ canvas.addEventListener('mousedown', (e) => {
 
     const { x, y } = getCanvasCursorPosition(e.clientX, e.clientY);
 
-    draw(x, y); // draw initial point
+    draw(x, y, options); // draw initial point
 });
 
 // check if mouse is pressed
@@ -34,17 +42,28 @@ canvas.addEventListener('mousemove', (e) => {
 
     const { x, y } = getCanvasCursorPosition(e.clientX, e.clientY);
 
-    draw(x, y);
+    draw(x, y, options);
+});
+
+lineWidth.addEventListener('change', (e) => {
+    options.lineWidth = e.target.value;
+});
+
+colour.addEventListener('change', (e) => {
+    options.colour = e.target.value;
 });
 
 // draw inside the canvas
-function draw(x, y) {
+function draw(x, y, options) {
+    ctx.lineWidth = options.lineWidth;
+    ctx.strokeStyle = options.colour;
+
     ctx.lineTo(x, y);
     ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(x, y);
 
-    socket.emit('draw', { x, y });
+    //socket.emit('draw', { x, y });
 }
 
 function getCanvasCursorPosition(mouseX, mouseY) {
@@ -55,10 +74,18 @@ function getCanvasCursorPosition(mouseX, mouseY) {
     return { x, y };
 }
 
-socket.on('draw', data => {
+function changeLineWidth(e) {
+    console.log(e);
+}
+
+function changeColour(e) {
+    console.log(e);
+}
+
+/* socket.on('draw', data => {
     ctx.lineTo(data.x, data.y);
     ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(data.x, data.y);
     ctx.beginPath();
-});
+}); */
