@@ -1,4 +1,18 @@
-//const socket = io('http://localhost:3000');
+const urlString = window.location.href;
+const url = new URL(urlString);
+const username = url.searchParams.get('username');
+const room = url.searchParams.get('room');
+
+if (!username || !room) {
+    window.location = 'index.html';
+}
+
+const socket = io('http://localhost:3000', {
+    query: {
+        username,
+        room
+    }
+});
 
 const canvas = document.getElementById('board');
 const lineWidth = document.querySelector('#lineWidth');
@@ -63,7 +77,7 @@ function draw(x, y, options) {
     ctx.beginPath();
     ctx.moveTo(x, y);
 
-    //socket.emit('draw', { x, y });
+    socket.emit('draw', { x, y, options });
 }
 
 function getCanvasCursorPosition(mouseX, mouseY) {
@@ -82,10 +96,13 @@ function changeColour(e) {
     console.log(e);
 }
 
-/* socket.on('draw', data => {
+socket.on('draw', data => {
+    ctx.lineWidth = data.options.lineWidth;
+    ctx.strokeStyle = data.options.colour;
+
     ctx.lineTo(data.x, data.y);
     ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(data.x, data.y);
     ctx.beginPath();
-}); */
+});

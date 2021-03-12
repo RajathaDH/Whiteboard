@@ -10,8 +10,12 @@ const io = socketio(server, {
 });
 
 io.on('connection', socket => {
+    const { username, room } = socket.handshake.query;
+
+    socket.join(room);
+
     socket.on('draw', data => {
-        socket.broadcast.emit('draw', data); // send to all clients except sender
+        socket.to(room).emit('draw', data); // send to all clients in room except sender
     });
 });
 
