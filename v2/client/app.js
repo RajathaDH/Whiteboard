@@ -17,6 +17,7 @@ const socket = io('http://localhost:3000', {
 const canvas = document.getElementById('board');
 const lineWidth = document.querySelector('#lineWidth');
 const colour = document.querySelector('#colour');
+const currentColourElement = document.querySelector('.current-colour');
 
 const ctx = canvas.getContext('2d');
 
@@ -64,7 +65,7 @@ lineWidth.addEventListener('change', (e) => {
 });
 
 colour.addEventListener('change', (e) => {
-    options.colour = e.target.value;
+    changeColour(e.target.value);
 });
 
 // draw inside the canvas
@@ -88,12 +89,9 @@ function getCanvasCursorPosition(mouseX, mouseY) {
     return { x, y };
 }
 
-function changeLineWidth(e) {
-    console.log(e);
-}
-
-function changeColour(e) {
-    console.log(e);
+function changeColour(colour) {
+    options.colour = colour;
+    currentColourElement.style.background = colour;
 }
 
 socket.on('draw', data => {

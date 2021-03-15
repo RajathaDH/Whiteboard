@@ -17,7 +17,20 @@
 
         <div class="options">
             <input type="range" id="lineWidth" min="10" max="30" step="4" value="10">
-            <input type="color" id="colour">
+            <div class="colour-options">
+                <div class="current-colour"></div>
+                <div class="colour-circles">
+                    <div class="colour-circle" onclick="changeColour('red')" style="background: red;"></div>
+                    <div class="colour-circle" onclick="changeColour('blue')" style="background: blue;"></div>
+                    <div class="colour-circle" onclick="changeColour('yellow')" style="background: yellow;"></div>
+                    <div class="colour-circle" onclick="changeColour('green')" style="background: green;"></div>
+                    <div class="colour-circle" onclick="changeColour('orange')" style="background: orange;"></div>
+                    <div class="colour-circle" onclick="changeColour('pink')" style="background: pink;"></div>
+                    <div class="colour-circle" onclick="changeColour('purple')" style="background: purple;"></div>
+                    <div class="colour-circle" onclick="changeColour('black')" style="background: black;"></div>
+                </div>
+                <input type="color" id="colour">
+            </div>
         </div>
     </div>
 </body>
