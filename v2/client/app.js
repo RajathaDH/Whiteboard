@@ -29,6 +29,7 @@ ctx.lineCap = 'round';
 //ctx.strokeStyle = 'black';
 
 let mousePressed = false;
+let currentTool = 'pen';
 
 const options = {
     lineWidth: 10,
@@ -41,7 +42,11 @@ canvas.addEventListener('mousedown', (e) => {
 
     const { x, y } = getCanvasCursorPosition(e.clientX, e.clientY);
 
-    draw(x, y, options); // draw initial point
+    if (currentTool == 'pen') {
+        draw(x, y, options); // draw initial point
+    } else if (currentTool == 'eraser') {
+        erase(x, y, options);
+    }
 });
 
 // check if mouse is pressed
@@ -57,7 +62,11 @@ canvas.addEventListener('mousemove', (e) => {
 
     const { x, y } = getCanvasCursorPosition(e.clientX, e.clientY);
 
-    draw(x, y, options);
+    if (currentTool == 'pen') {
+        draw(x, y, options);
+    } else if (currentTool == 'eraser') {
+        erase(x, y, options);
+    }
 });
 
 lineWidth.addEventListener('change', (e) => {
@@ -81,6 +90,10 @@ function draw(x, y, options) {
     socket.emit('draw', { x, y, options });
 }
 
+function erase(x, y, options) {
+    ctx.clearRect(x - (options.lineWidth / 2), y - (options.lineWidth / 2), options.lineWidth, options.lineWidth);
+}
+
 function getCanvasCursorPosition(mouseX, mouseY) {
     const canvasRect = canvas.getBoundingClientRect();
     const x = mouseX - canvasRect.left;
@@ -92,6 +105,10 @@ function getCanvasCursorPosition(mouseX, mouseY) {
 function changeColour(colour) {
     options.colour = colour;
     currentColourElement.style.background = colour;
+}
+
+function changeTool(tool) {
+    currentTool = tool;
 }
 
 socket.on('draw', data => {

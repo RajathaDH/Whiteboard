@@ -16,7 +16,13 @@
         </div>
 
         <div class="options">
-            <input type="range" id="lineWidth" min="10" max="30" step="4" value="10">
+            <div class="draw-options">
+                Pen<input type="radio" name="tool" value="pen" class="tool" onclick="changeTool('pen')" checked>
+                Eraser<input type="radio" name="tool" value="eraser" class="tool" onclick="changeTool('eraser')">
+            </div>
+            <div class="line-options">
+                <input type="range" id="lineWidth" min="10" max="30" step="4" value="10">
+            </div>
             <div class="colour-options">
                 <div class="current-colour"></div>
                 <div class="colour-circles">
