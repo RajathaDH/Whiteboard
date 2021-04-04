@@ -15,7 +15,7 @@ io.on('connection', socket => {
     socket.join(room);
 
     socket.on('draw', data => {
-        socket.to(room).emit('draw', data); // send to all clients in room except sender
+        socket.to(room).emit('draw', { user: username, data }); // send to all clients in room except sender
     });
 });
 

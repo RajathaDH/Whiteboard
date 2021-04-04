@@ -18,8 +18,11 @@ const canvas = document.getElementById('board');
 const lineWidth = document.querySelector('#lineWidth');
 const colour = document.querySelector('#colour');
 const currentColourElement = document.querySelector('.current-colour');
+const currentUserElement = document.querySelector('#currentUser');
 
 const ctx = canvas.getContext('2d');
+
+currentUserElement.innerText = username;
 
 canvas.width = 800;
 canvas.height = 600;
@@ -79,6 +82,8 @@ colour.addEventListener('change', (e) => {
 
 // draw inside the canvas
 function draw(x, y, options) {
+    currentUserElement.innerText = username;
+    
     ctx.lineWidth = options.lineWidth;
     ctx.strokeStyle = options.colour;
 
@@ -111,7 +116,9 @@ function changeTool(tool) {
     currentTool = tool;
 }
 
-socket.on('draw', data => {
+socket.on('draw', ({ user, data }) => {
+    currentUserElement.innerText = user;
+
     ctx.lineWidth = data.options.lineWidth;
     ctx.strokeStyle = data.options.colour;
 
