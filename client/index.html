@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="./app.js" defer></script>
+    <title>RajaBoard</title>
+</head>
+<body>
+    <div class="container">
+        <div class="button-container">
+            <button class="btn" onclick="window.location='whiteboard.html'">WhiteBoard</button>
+            <button class="btn" onclick="openRoomPopup()">RajaBoard</button>
+        </div>
+
+        <div class="modal-popup">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h1>Join Room</h1>
+                    <button class="btn-close" onclick="closeRoomPopup()">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="rajaboard.html" id="roomForm" method="GET">
+                        <div>
+                            <label for="name">Name</label>
+                            <input type="text" name="username" id="username" required>
+                        </div>
+                        <div>
+                            <label for="room">Room</label>
+                            <input type="text" name="room" id="room" required>
+                        </div>
+                        <button type="submit">Let's Draw</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
