@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./whiteboard.css">
+    <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous" defer></script>
+    <script src="./rajaboard.js" defer></script>
+    <title>RajaBoard</title>
+</head>
+<body>
+    <div class="container">
+        <div class="canvas-container">
+            <canvas id="board"></canvas>
+        </div>
+
+        <div>
+            <p class="current-user">Current User: <span id="currentUser"></span></p>
+            <div class="options-container">
+                <div class="options draw-options">
+                    <p>Tool</p>
+                    Pen<input type="radio" name="tool" value="pen" class="tool" onclick="changeTool('pen')" checked>
+                    Eraser<input type="radio" name="tool" value="eraser" class="tool" onclick="changeTool('eraser')">
+                </div>
+
+                <div class="options line-options">
+                    <p>Tool Size</p>
+                    <input type="range" id="lineWidth" min="10" max="30" step="4" value="10">
+                </div>
+
+                <div class="options colour-options">
+                    <div class="current-colour"></div>
+                    <div class="colour-circles">
+                        <div class="colour-circle" onclick="changeColour('red')" style="background: red;"></div>
+                        <div class="colour-circle" onclick="changeColour('blue')" style="background: blue;"></div>
+                        <div class="colour-circle" onclick="changeColour('yellow')" style="background: yellow;"></div>
+                        <div class="colour-circle" onclick="changeColour('green')" style="background: green;"></div>
+                        <div class="colour-circle" onclick="changeColour('orange')" style="background: orange;"></div>
+                        <div class="colour-circle" onclick="changeColour('pink')" style="background: pink;"></div>
+                        <div class="colour-circle" onclick="changeColour('purple')" style="background: purple;"></div>
+                        <div class="colour-circle" onclick="changeColour('black')" style="background: black;"></div>
+                    </div>
+                    <input type="color" id="colour">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
