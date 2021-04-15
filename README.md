@@ -2,6 +2,8 @@
 
 A collaborative whiteboard application.
 
+[Visit RajaBoard](http://rajaboard.surge.sh)
+
 ### Setup.
 
 ### Server.

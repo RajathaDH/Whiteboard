@@ -7,7 +7,9 @@ if (!username || !room) {
     window.location = 'index.html';
 }
 
-const socket = io('http://localhost:3000', {
+const BASE_URL = 'http://localhost:3000';
+
+const socket = io(BASE_URL, {
     query: {
         username,
         room
